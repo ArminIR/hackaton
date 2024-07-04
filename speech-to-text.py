@@ -1,9 +1,9 @@
-from flask import Flask, render_template, request, jsonify
-import speech_recognition as sr
-import noisereduce as nr
-import numpy as np
+from flask import Flask, render_template, request, jsonify # type: ignore
+import speech_recognition as sr # type: ignore
+import noisereduce as nr # type: ignore
+import numpy as np # type: ignore
 import io
-from scipy.io import wavfile
+from scipy.io import wavfile # type: ignore
 
 app = Flask(__name__)
 
@@ -23,6 +23,7 @@ def recognize():
     try:
         with sr.Microphone() as source:
             recognizer.adjust_for_ambient_noise(source)  # Adjust for ambient noise
+            #Takes around 3 seconds befort it starts listening for speech TODO add timer to incicate when it starts listening
             audio = recognizer.listen(source, timeout=10)  # Listen with a 10-second timeout
         
         # Convert audio to numpy array
@@ -38,6 +39,7 @@ def recognize():
         reduced_noise_audio_io.seek(0)
         audio = sr.AudioData(reduced_noise_audio_io.read(), sample_rate, 2)
         
+        # Recognize speech using Google Speech Recognition
         words = recognizer.recognize_google(audio, language=language)
         return jsonify({'success': True, 'words': words})
     
