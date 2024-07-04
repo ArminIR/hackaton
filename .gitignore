@@ -1,6 +1,2 @@
 # Ignore the virtual environment directory
-venv/
-./venv/
-
-.cfg
-Scripts\
+.venv/
