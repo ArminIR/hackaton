@@ -107,10 +107,6 @@
                     </span>
                 </div>
                 <div class="w3-col s3 w3-right-align">
-                    <button id="settBtn" class="w3-button w3-right w3-white w3-opacity-min w3-border w3-border-blue w3-text-blue w3-round-large w3-hover-blue w3-hover-opacity w3-light-card-inset">
-                        <i class="fa fa-cog"></i>
-                        <span class="w3-hide-small">&nbsp;Settings</span>
-                    </button>
                     <button id="closeBtn" style="display: none;" class="w3-button w3-right w3-white w3-opacity-min w3-border w3-border-blue w3-text-blue w3-round-large w3-hover-blue w3-hover-opacity w3-light-card-inset">
                         <i class="fa fa-times-circle"></i>
                         <span class="w3-hide-small">&nbsp;Close</span>
@@ -142,10 +138,18 @@
                     <textarea placeholder="Write text/record your voice" name="" id="textBlock" cols="30" rows="10" class="w3-input w3-border"></textarea>
                 </div>
                 <div id="runBtnView" class="w3-center">
-                    <button id="runBtn" style="width: 200px;" class="w3-button w3-margin-top w3-margin-bottom w3-padding-large w3-opacity-min w3-border w3-border-blue w3-text-blue w3-round-large w3-hover-blue w3-hover-opacity w3-light-card-inset">
-                        <i class="fa fa-play"></i>
-                        <span class="">&nbsp;Play the text</span>
-                    </button>
+                    <div class="w3-col s6 w3-center">
+                        <button id="settBtn" class="w3-button w3-margin-top w3-margin-bottom w3-padding-large w3-opacity-min w3-border w3-border-blue w3-text-blue w3-round-large w3-hover-blue w3-hover-opacity w3-light-card-inset">
+                            <i class="fa fa-cog"></i>
+                            <span class="w3-hide-small">&nbsp;Dictation Settings</span>
+                        </button>
+                    </div>
+                    <div class="w3-col s6 w3-center">
+                        <button id="runBtn" class="w3-button w3-margin-top w3-margin-bottom w3-padding-large w3-opacity-min w3-border w3-border-blue w3-text-blue w3-round-large w3-hover-blue w3-hover-opacity w3-light-card-inset">
+                            <i class="fa fa-play"></i>
+                            <span>&nbsp;Play the text</span>
+                        </button>
+                    </div>
                 </div>
                 <div id="ranBtnView" style="display: none;" class="w3-center">
                     <button id="runBtn" style="width: 200px;" class="w3-button w3-margin-top w3-margin-bottom w3-padding-large w3-opacity-min w3-border w3-border-blue w3-text-blue w3-hover-text-blue w3-round-large w3-hover-white w3-hover-opacity w3-light-card-inset">
