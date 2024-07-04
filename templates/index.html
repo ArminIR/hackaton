@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech to Text</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f2f5;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            max-width: 600px;
+            width: 100%;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+        }
+        .language-select {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .language-select label {
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        .language-select select {
+            padding: 5px;
+            font-size: 16px;
+        }
+        .button-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .button-container button {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button-container button:hover {
+            background-color: #0056b3;
+        }
+        .button-container button.recording {
+            background-color: #ff0000;
+        }
+        .output {
+            text-align: center;
+        }
+        .output textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Speech to Text</h1>
+        </div>
+        <div class="language-select">
+            <label for="language">Choose language:</label>
+            <select id="language">
+                <option value="en-US">English (US)</option>
+                <option value="nl-NL">Dutch</option>
+                <option value="es-ES">Spanish</option>
+                <option value="pl-PL">Polish</option>
+                <option value="zh-CN">Chinese (Mandarin)</option>
+                <option value="fr-FR">French</option>
+            </select>
+        </div>
+        <div class="button-container">
+            <button id="start-recognition">Start Recognition</button>
+        </div>
+        <div class="output">
+            <textarea id="output-text" rows="10" placeholder="Recognized speech will appear here..."></textarea>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('start-recognition').addEventListener('click', function() {
+            const button = this;
+            const language = document.getElementById('language').value;
+
+            button.disabled = true;
+            button.classList.add('recording');
+            button.textContent = 'Recording...';
+
+            fetch('/recognize', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `language=${language}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    document.getElementById('output-text').value = data.words;
+                } else {
+                    alert('Error: ' + data.error);
+                }
+                button.disabled = false;
+                button.classList.remove('recording');
+                button.textContent = 'Start Recognition';
+            })
+            .catch(error => {
+                alert('Error: ' + error);
+                button.disabled = false;
+                button.classList.remove('recording');
+                button.textContent = 'Start Recognition';
+            });
+        });
+    </script>
+</body>
+</html>
