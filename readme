@@ -1,0 +1,3 @@
+Commands
+- venv\Scripts\activate  
+- python -m flask --app .\speech-to-text.py run
