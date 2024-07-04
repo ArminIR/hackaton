@@ -3,7 +3,7 @@ export function queryEl(selector) {
     return document.querySelector(selector);
 }
 
-// Select group elements  
+// Select group elements
 export function queryAllEl(selector) {
     return document.querySelectorAll(selector);
 }
@@ -12,7 +12,7 @@ export function queryAllEl(selector) {
 let tmp;
 function hideShow(el, flag) {
     if (el?.style) {
-        el.style.display = flag ? 'block' : 'none';
+        el.style.display = flag ? 'block' : flag === null ? '' : 'none';
     } else {
         tmp = queryEl(el);
         if (tmp) hideShow(tmp, flag);
@@ -27,4 +27,9 @@ export function showEl(el) {
 // Hide Element
 export function hideEl(el) {
     hideShow(el, 0);
+}
+
+// Reset Element display
+export function resetEl(el) {
+    hideShow(el, null);
 }

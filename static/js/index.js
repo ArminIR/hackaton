@@ -1,7 +1,6 @@
-import { queryEl, hideEl, showEl } from "./helpers.js";
+import { queryEl, hideEl, showEl, resetEl } from "./helpers.js";
 import { switchViewTo } from "./views.js";
 import app from "./model/index.js";
-
 
 // Buttons
 const [
@@ -15,6 +14,8 @@ const [
     closeBtn
 ] = ['#startBtn', '#mainBtn', '#settBtn', '#closeBtn'].map(id => queryEl(id));
 
+// Track the view state
+let isSettingsViewOpen = false;
 
 // Show Intro with Help
 startBtn.addEventListener('click', function () {
@@ -30,24 +31,28 @@ mainBtn.addEventListener('click', function () {
 
 // Settings View
 settingsBtn.addEventListener('click', function () {
-    // toggle
+    // Open settings view
     switchViewTo('open-settings');
-    // hide this btn
+    // Hide the settings button
     hideEl(settingsBtn);
+    // Mark settings view as open
+    isSettingsViewOpen = true;
 });
 
 // Hide Settings View
 closeBtn.addEventListener('click', function () {
-    // toggle
+    // Close settings view
     switchViewTo('close-settings');
-    // hide this btn
-    showEl(settingsBtn);
-});
 
+    // Reset the settings button display
+    resetEl(settingsBtn);
+
+    // Mark settings view as closed
+    isSettingsViewOpen = false;
+});
 
 // When Everything is loaded
 window.addEventListener('DOMContentLoaded', function () {
-
     // Hide loader & switch to start
     switchViewTo('start');
     // Check for error
@@ -61,7 +66,4 @@ window.addEventListener('DOMContentLoaded', function () {
 
     // Clear input
     app.textBlock.value = '';
-
 }, false);
-
-
